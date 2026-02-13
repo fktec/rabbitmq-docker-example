@@ -1,3 +1,2 @@
 # Ignore
-rabbitmq-volume/etc/rabbitmq/*
-rabbitmq-volume/var/lib/rabbitmq/*
+rabbitmq-volume/
