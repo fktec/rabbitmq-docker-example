@@ -1,0 +1,45 @@
+# SERVICES
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    build:
+      context: .
+      dockerfile: rabbitmq-repository/Dockerfile-rabbitmq-artemis-3-8-5
+    environment:
+      RABBITMQ_NODENAME: rabbit@rabbitmq
+    ports:
+      # AMQP
+      - "5672:5672"
+      # CONSOLE
+      - "15672:15672"
+      # PROMETHEUS
+      - "15692:15692"
+    networks:
+      - rabbitmq-network
+    volumes:
+      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-volume/etc/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf"
+      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-volume/etc/rabbitmq/definitions/conf.d:/etc/rabbitmq/definitions/conf.d"
+      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-volume/var/lib/rabbitmq:/var/lib/rabbitmq/mnesia"
+  prometheus:
+    image: prom/prometheus:v2.45.0
+    container_name: prometheus
+    ports:
+        - "9090:9090"
+    volumes:
+        - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-prometheus/configuration/prometheus.yml:/etc/prometheus/prometheus.yml"
+    networks: 
+        - rabbitmq-network
+  grafana:
+    image: grafana/grafana-enterprise:10.0.1
+    container_name: grafana
+    ports:
+        - "3000:3000"
+    volumes:
+      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-grafana/volume/var/lib/grafana:/var/lib/grafana"
+      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-grafana/volume/etc/grafana/grafana.ini:/etc/grafana/grafana.ini"
+    networks: 
+        - rabbitmq-network
+# NETWORK
+networks:	
+  rabbitmq-network:
+    driver: bridge
