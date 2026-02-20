@@ -1,0 +1,20 @@
+{
+  "bindings": [
+    {
+      "source": "test.temporary",
+      "vhost": "/",
+      "destination": "sub.t1.test.temporary",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    },
+    {
+      "source": "test.temporary",
+      "vhost": "/",
+      "destination": "sub.t2.test.temporary",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    }
+  ]
+}

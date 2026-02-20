@@ -1,0 +1,11 @@
+{
+    "rabbit_version": "3.8.5",
+    "rabbitmq_version": "3.8.5",
+    "product_name": "RabbitMQ",
+    "product_version": "3.8.5",
+    "vhosts": [
+        {
+            "name": "/"
+        }
+    ]
+}

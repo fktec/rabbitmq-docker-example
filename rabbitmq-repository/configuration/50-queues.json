@@ -1,0 +1,22 @@
+{
+  "queues": [
+    {
+      "name": "sub.t1.test.temporary",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    },
+    {
+      "name": "sub.t2.test.temporary",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-type": "classic"
+      }
+    }
+  ]
+}
