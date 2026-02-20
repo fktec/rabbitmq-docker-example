@@ -40,9 +40,9 @@ services:
         - "3000:3000"
     volumes:
       # DATABASE INTERNO
-      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-grafana/volume/var/lib/grafana:/var/lib/grafana"
+      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-grafana/volume/database-internal:/var/lib/grafana"
       # ARQUIVO DE CONFIGURAÇÃO DO GRAFANA
-      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-grafana/volume/etc/grafana/grafana.ini:/etc/grafana/grafana.ini"
+      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-grafana/volume/configuration/grafana.ini:/etc/grafana/grafana.ini"
     networks: 
         - rabbitmq-network
 # NETWORK
