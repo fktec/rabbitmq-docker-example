@@ -21,9 +21,10 @@ services:
       - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-repository/configuration/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf"
       # DATABASE INTERNO
       - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-volume/var/lib/rabbitmq:/var/lib/rabbitmq/mnesia"
+
   prometheus:
-    image: prom/prometheus:v2.45.0
     container_name: prometheus
+    image: prom/prometheus:v2.45.0
     ports:
         - "9090:9090"
     volumes:
@@ -31,9 +32,10 @@ services:
         - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-prometheus/configuration/prometheus.yml:/etc/prometheus/prometheus.yml"
     networks: 
         - rabbitmq-network
+
   grafana:
-    image: grafana/grafana-enterprise:10.0.1
     container_name: grafana
+    image: grafana/grafana-enterprise:10.0.1
     ports:
         - "3000:3000"
     volumes:
