@@ -1,0 +1,27 @@
+# FROM docker.artifactory.globoi.com/gcorp/devops/docker-images/ubuntu-linux/java-jre8-temurin:24.04
+FROM rabbitmq:3.8.5-management
+
+# VARIÁVEIS DE AMBIENTE
+## - Diretório base do RabbitMQ
+ENV RABBITMQ_CONFIG_DIR="/etc/rabbitmq"
+## - Fixando o nome do nó para evitar problemas de clusterização e descoberta de nós
+ENV RABBITMQ_NODENAME="rabbit@rabbitmq"
+
+# PORTAS
+EXPOSE \
+## - AMQP
+    5672 \
+## - CONSOLE WEB
+    15682
+
+# USER root
+
+# PLUGINS HABILITADOS POR PADRÃO
+## - Management Plugin
+RUN /bin/sh -c 'rabbitmq-plugins enable --offline rabbitmq_prometheus'
+
+# CRIANDO PASTAS INICIAIS
+RUN mkdir -p ${RABBITMQ_CONFIG_DIR}/definitions/conf.d
+
+# BROKER HOME
+WORKDIR $RABBITMQ_HOME

@@ -4,9 +4,7 @@ services:
     container_name: rabbitmq
     build:
       context: .
-      dockerfile: rabbitmq-repository/Dockerfile-rabbitmq-artemis-3-8-5
-    environment:
-      RABBITMQ_NODENAME: rabbit@rabbitmq
+      dockerfile: rabbitmq-repository/Dockerfile
     ports:
       # AMQP
       - "5672:5672"
@@ -17,8 +15,11 @@ services:
     networks:
       - rabbitmq-network
     volumes:
-      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-repository/configuration:/etc/rabbitmq/definitions/conf.d"
-      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-volume/etc/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf"
+      # DEFINIÇÕES DE FILAS, EXCHANGES, BINDINGS, USUÁRIOS, PERMISSÕES, ETC
+      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-repository/configuration/definitions:/etc/rabbitmq/definitions/conf.d"
+      # ARQUIVO DE CONFIGURAÇÃO DO RABBITMQ
+      - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-repository/configuration/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf"
+      # DATABASE INTERNO
       - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-volume/var/lib/rabbitmq:/var/lib/rabbitmq/mnesia"
   prometheus:
     image: prom/prometheus:v2.45.0
@@ -35,7 +36,9 @@ services:
     ports:
         - "3000:3000"
     volumes:
+      # DATABASE INTERNO
       - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-grafana/volume/var/lib/grafana:/var/lib/grafana"
+      # ARQUIVO DE CONFIGURAÇÃO DO GRAFANA
       - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-grafana/volume/etc/grafana/grafana.ini:/etc/grafana/grafana.ini"
     networks: 
         - rabbitmq-network
