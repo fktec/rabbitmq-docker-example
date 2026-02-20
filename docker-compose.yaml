@@ -27,6 +27,7 @@ services:
     ports:
         - "9090:9090"
     volumes:
+        # ARQUIVO DE CONFIGURAÇÃO DO PROMETHEUS
         - "/mnt/c/CUSTOM/DEV/PESSOAL/BROKER/RABBITMQ/rabbitmq-docker-example/rabbitmq-prometheus/configuration/prometheus.yml:/etc/prometheus/prometheus.yml"
     networks: 
         - rabbitmq-network
